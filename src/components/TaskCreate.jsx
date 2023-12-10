@@ -1,24 +1,26 @@
-
-import { useState } from 'react';
 import '../style.css';
+import { useState } from 'react';
+import TasksContext from "../context/Tasks";
+import { useContext } from "react";
 
-function TaskCreate({veriler,bool,task,onUpdate}) {
+function TaskCreate({bool,task,onUpdate}) {
+    const {veri,edittaskbyid} = useContext(TasksContext)
     function handleclick(e){
         e.preventDefault();
         if(bool){
             onUpdate(task.id,basliq,desc);
         }
         else{
-            veriler(basliq,desc);
+            veri(basliq,desc);
         }
         setbasliq('');
         setDesc('');
     };
-    const [basliq, setbasliq] = useState(task ? task.taskName:'');
+    const [basliq, setbasliq] = useState(task ? task.basliq:'');
     const basliqfunc = (e)=>{
         setbasliq(e.target.value);
     };
-    const [desc, setDesc] = useState(task ? task.taskDesc:'');
+    const [desc, setDesc] = useState(task ? task.desc:'');
     const taskfunc = (e)=>{
         setDesc(e.target.value);
     };
